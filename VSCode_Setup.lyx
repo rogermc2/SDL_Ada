@@ -1,0 +1,443 @@
+#LyX 2.4 created this file. For more info see https://www.lyx.org/
+\lyxformat 620
+\begin_document
+\begin_header
+\save_transient_properties true
+\origin unavailable
+\textclass article
+\begin_preamble
+
+\end_preamble
+\use_default_options false
+\maintain_unincluded_children no
+\language english
+\language_package none
+\inputencoding auto-legacy
+\fontencoding default
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_roman_osf false
+\font_sans_osf false
+\font_typewriter_osf false
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command bibtex
+\index_command default
+\float_placement class
+\float_alignment class
+\paperfontsize 12
+\spacing single
+\use_hyperref false
+\papersize default
+\use_geometry true
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 0
+\use_package esint 1
+\use_package mathdots 0
+\use_package mathtools 0
+\use_package mhchem 0
+\use_package stackrel 0
+\use_package stmaryrd 0
+\use_package undertilde 0
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 0
+\use_formatted_ref 0
+\use_minted 0
+\use_lineno 0
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\leftmargin 10mm
+\topmargin 10mm
+\rightmargin 10mm
+\bottommargin 15mm
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tablestyle default
+\tracking_changes false
+\output_changes true
+\change_bars false
+\postpone_fragile_content false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\docbook_table_output 0
+\docbook_mathml_prefix 1
+\end_header
+
+\begin_body
+
+\begin_layout Standard
+Open the project root in VS Code —
+ the folder containing your `alire.toml`.
+\end_layout
+
+\begin_layout Standard
+From Terminal:
+\end_layout
+
+\begin_layout LyX-Code
+cd path/to/your/project
+\end_layout
+
+\begin_layout LyX-Code
+code .
+\end_layout
+
+\begin_layout Standard
+Or,
+ from Alire:
+\end_layout
+
+\begin_layout LyX-Code
+alr edit
+\end_layout
+
+\begin_layout Standard
+Set that permanently with:
+\end_layout
+
+\begin_layout Quote
+alr settings --set --global editor.cmd "code ."
+\end_layout
+
+\begin_layout Standard
+For Ada Language Server,
+ add this file:
+\end_layout
+
+\begin_layout LyX-Code
+mkdir -p .vscode
+\end_layout
+
+\begin_layout Standard
+Create `.vscode/settings.json`:
+\end_layout
+
+\begin_layout LyX-Code
+{
+\end_layout
+
+\begin_layout LyX-Code
+"ada.projectFile":
+ "your_project.gpr"
+\end_layout
+
+\begin_layout LyX-Code
+}
+\end_layout
+
+\begin_layout Standard
+Use the actual .gpr file from your project.
+ 
+\end_layout
+
+\begin_layout Standard
+The Ada extension reads workspace settings using ada.projectFile.
+\end_layout
+
+\begin_layout Standard
+For building,
+ create .vscode/tasks.json:
+\end_layout
+
+\begin_layout LyX-Code
+{
+\end_layout
+
+\begin_layout LyX-Code
+"version":
+ "2.0.0",
+\end_layout
+
+\begin_layout LyX-Code
+"tasks":
+ [
+\end_layout
+
+\begin_layout LyX-Code
+{
+\end_layout
+
+\begin_layout LyX-Code
+"label":
+ "alr build",
+\end_layout
+
+\begin_layout LyX-Code
+"type":
+ "shell",
+\end_layout
+
+\begin_layout LyX-Code
+"command":
+ "alr build",
+\end_layout
+
+\begin_layout LyX-Code
+"group":
+ "build",
+\end_layout
+
+\begin_layout LyX-Code
+"problemMatcher":
+ []
+\end_layout
+
+\begin_layout LyX-Code
+},
+\end_layout
+
+\begin_layout LyX-Code
+{
+\end_layout
+
+\begin_layout LyX-Code
+"label":
+ "alr run",
+\end_layout
+
+\begin_layout LyX-Code
+"type":
+ "shell",
+\end_layout
+
+\begin_layout LyX-Code
+"command":
+ "alr run",
+\end_layout
+
+\begin_layout LyX-Code
+"group":
+ "test",
+\end_layout
+
+\begin_layout LyX-Code
+"problemMatcher":
+ []
+\end_layout
+
+\begin_layout LyX-Code
+}
+\end_layout
+
+\begin_layout LyX-Code
+]
+\end_layout
+
+\begin_layout LyX-Code
+}
+\end_layout
+
+\begin_layout Standard
+Then in VS Code:
+\end_layout
+
+\begin_layout Standard
+Terminal → Run Build Task
+\end_layout
+
+\begin_layout Standard
+or press:
+\end_layout
+
+\begin_layout Standard
+Shift + Cmd + B
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+For ordinary editing,
+ use:
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float table
+placement H
+alignment document
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Tabular
+<lyxtabular version="3" rows="4" columns="2">
+<features tabularvalignment="middle">
+<column alignment="center" valignment="top">
+<column alignment="center" valignment="top">
+<row>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Cmd-click symbol
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+go to definition
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Cmd-Shift-O
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+symbols in file
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Cmd-P
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+open file by name
+\end_layout
+
+\end_inset
+</cell>
+</row>
+<row>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+Cmd-Shift-P
+\end_layout
+
+\end_inset
+</cell>
+<cell alignment="center" valignment="top" topline="true" usebox="none">
+\begin_inset Text
+
+\begin_layout Plain Layout
+command palette
+\end_layout
+
+\end_inset
+</cell>
+</row>
+</lyxtabular>
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+If the Ada extension does not recognize the project,
+ restart the language server:
+\end_layout
+
+\begin_layout Standard
+Cmd-Shift-P → Ada:
+ Restart language server
+\end_layout
+
+\begin_layout Standard
+
+\end_layout
+
+\begin_layout Standard
+Best simple workflow:
+\end_layout
+
+\begin_layout LyX-Code
+cd your_project
+\end_layout
+
+\begin_layout LyX-Code
+code .
+\end_layout
+
+\begin_layout Standard
+Then edit in VS Code,
+ build with Shift-Cmd-B and use the integrated terminal for:
+\end_layout
+
+\begin_layout Standard
+alr build
+\end_layout
+
+\begin_layout Standard
+alr run
+\end_layout
+
+\begin_layout Standard
+alr clean
+\end_layout
+
+\end_body
+\end_document

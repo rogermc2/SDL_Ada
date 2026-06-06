@@ -1,0 +1,21 @@
+
+
+alr init --bin sdl_test  
+cd sdl_test
+alr with sdlada 
+export CPATH="$(xcrun --show-sdk-path)/usr/include"
+alr build -- -largs $(sdl2-config --libs)
+alr run   displays empty window
+
+Include  pragma Linker_Options("-lSDL2"); in source file to replace
+   in the build command -- -largs $(sdl2-config --libs) .
+alr build
+
+
+Add to gpr file:
+   package Linker is
+      for Switches ("Ada") use ("-lSDL2");
+   end Linker;
+
+Now the pragma is not needed.
+alr build
