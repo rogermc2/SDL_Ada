@@ -17,21 +17,22 @@ procedure Linked is
    Event    : SDL.Events.Events.Events;
    Running  : Boolean := True;
    My_List  : Person_List;
-   --  My_List  : Person_List.Link := null;
    procedure Render is
       use SDL.Video.Renderers;
       use type SDL.C.int;
       use Person_List_Package;
-      Node_Width   : constant := 128;
-      Box_X        : constant := 28;
-      Box_Y        : constant := 200;
-      Box_Width    : constant := 164;
-      Box_Height   : constant := 48;
-      Arrow_X      : constant := Box_X + Box_Width;
-      Arrow_Length : constant := Node_Width + Box_Width;
-      Draw_X       : SDL.C.int := 0;
-      Node         : Person_List;
-      Curs         : Cursor := My_List.First;
+      Node_Width      : constant := 128;
+      Box_X           : constant := 20;
+      Box_Y           : constant := 200;
+      Box_Width       : constant := 64;
+      Box_Height      : constant := 48;
+      Arrow_X         : constant := Box_X + Box_Width;
+      Arrow_Y         : constant := Box_Y + Box_Height / 2;
+      Arrow_Length    : constant := Node_Width - Box_Width;
+      Arrow_Head_Size : constant := 20;
+      Draw_X          : SDL.C.int := 0;
+      Node            : Person_List;
+      Curs            : Cursor := My_List.First;
    begin
       Renderer.Set_Draw_Colour ((0, 0, 0, 255));
       Renderer.Fill
@@ -40,9 +41,27 @@ procedure Linked is
       Renderer.Set_Draw_Colour ((0, 128, 0, 255));
       while Has_Element (Curs) loop
          Draw_X := Draw_X + 128;
-         Renderer.Draw
-          (Rectangle => SDL.Video.Rectangles.Rectangle'
-          (Box_X + Draw_X, Box_Y, Box_Width, Box_Height));
+         Renderer.Draw (Rectangle => SDL.Video.Rectangles.Rectangle'
+                        (Box_X + Draw_X, Box_Y, Box_Width, Box_Height));
+
+         Renderer.Draw (Line => SDL.Video.Rectangles.Line_Segment'
+                        (SDL.Coordinates'(Arrow_X + Draw_X, Arrow_Y),
+                        (SDL.Coordinates'(Arrow_X + Arrow_Length + Draw_X,
+                         Arrow_Y))));
+         Renderer.Draw (Line => SDL.Video.Rectangles.Line_Segment'
+                        (SDL.Coordinates'
+                        (Arrow_X + Arrow_Length - Arrow_Head_Size + Draw_X,
+                         Arrow_Y + Arrow_Head_Size),
+                        (SDL.Coordinates'(Arrow_X + Arrow_Length + Draw_X,
+                         Arrow_Y))));
+         Renderer.Draw (Line => SDL.Video.Rectangles.Line_Segment'
+                        (SDL.Coordinates'
+                        (Arrow_X + Arrow_Length - Arrow_Head_Size + Draw_X ,
+                        Arrow_Y - Arrow_Head_Size),
+                        (SDL.Coordinates' 
+                        (Arrow_X + Arrow_Length + Draw_X,
+                         Arrow_Y))));
+
          Next (Curs);
       end loop;
 
@@ -67,27 +86,19 @@ procedure Linked is
    end Print;
 
 begin
-   --  Initialize data
-   --  My_List := null;
    Print (My_List);
    My_List.Insert (12, To_Unbounded_String ("A"));
-   --  Person_List.Insert (My_List, Person'(12, To_Unbounded_String ("A")));
    Print (My_List);
-   --  Person_List.Insert (My_List, Person'(3, To_Unbounded_String ("B")));
    My_List.Insert (3, To_Unbounded_String ("B"));
    Print (My_List);
-   --  Person_List.Insert (My_List, Person'(45, To_Unbounded_String ("C")));
    My_List.Insert (45, To_Unbounded_String ("C"));
    Print (My_List);
-   --  Person_List.Insert (My_List, Person'(2, To_Unbounded_String ("D")));
    My_List.Insert (2, To_Unbounded_String ("D"));
    Print (My_List);
 
    My_List.Delete_First;
-   --  Person_List.Remove (My_List);
    Print (My_List);
 
-   --  Person_List.Insert (My_List, Person'(20, To_Unbounded_String ("E")));
    My_List.Insert (20, To_Unbounded_String ("E"));
    Print (My_List);
 
@@ -104,7 +115,6 @@ begin
    SDL.Video.Renderers.Makers.Create (Renderer, Window.Get_Surface);
 
    while Running loop
-
       while SDL.Events.Events.Poll (Event) loop
          if Event.Common.Event_Type = SDL.Events.Quit then
             Running := False;
