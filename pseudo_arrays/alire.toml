@@ -1,4 +1,4 @@
-name = "linked_lists"
+name = "arrays"
 description = ""
 version = "0.1.0-dev"
 
@@ -9,7 +9,7 @@ licenses = "MIT OR Apache-2.0 WITH LLVM-exception"
 website = ""
 tags = []
 
-executables = ["linked"]
+executables = ["manage_arrays"]
 
 [[depends-on]]
 sdlada = "^2.5.20"

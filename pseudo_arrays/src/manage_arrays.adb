@@ -12,8 +12,9 @@ with SDL.Video.Windows.Makers;
 with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
 with Ada.Text_IO; use Ada.Text_IO;
 
+with Common; use Common;
 with Types; use Types;
-procedure Linked is
+procedure Manage_Arrays is
    use type SDL.Events.Event_Types;
    Width   : constant := 800;
    Height  : constant := 800;
@@ -22,6 +23,8 @@ procedure Linked is
    Event    : SDL.Events.Events.Events;
    Running  : Boolean := True;
    My_List  : Person_List;
+   My_Array : Array_Package.Array_Record_Access :=
+    new Array_Package.Array_Record;
    Font     : SDL.TTFs.Fonts;
    procedure Render is
       use SDL.Video.Renderers;
@@ -77,7 +80,7 @@ procedure Linked is
 
          SDL.Video.Textures.Makers.Create
             (Text_Texture, Renderer, Text_Surface);
-         SDL.Video.Renderers.Copy (Renderer, Text_Texture, 
+         SDL.Video.Renderers.Copy (Renderer, Text_Texture,
             To => (X => 20.0 + Float (X_Start) * Pos, Y => 204.0,
                    Width => 64.0, Height => 48.0));
          Next (Curs);
@@ -120,6 +123,18 @@ begin
    My_List.Insert (20, To_Unbounded_String ("E"));
    Print (My_List);
 
+   Print (My_Array);
+   My_Array.Insert (My_Array, 12, To_Unbounded_String ("A"));
+   Print (My_Array);
+   My_Array.Insert (My_Array, 3, To_Unbounded_String ("B"));
+   Print (My_Array);
+   My_Array.Insert (My_Array, 45, To_Unbounded_String ("C"));
+   Print (My_Array);
+   My_Array.Insert (My_Array, 2, To_Unbounded_String ("D"));
+   Print (My_Array);
+   My_Array.Insert (My_Array, 20, To_Unbounded_String ("E"));
+   Print (My_Array);
+
    if not SDL.Initialise (Flags => SDL.Enable_Screen) then
       return;
    end if;
@@ -151,4 +166,4 @@ begin
    Window.Finalize;
    SDL.Finalise;
 
-end Linked;
+end Manage_Arrays;

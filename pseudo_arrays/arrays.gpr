@@ -1,15 +1,15 @@
 
-with "config/linked_lists_config.gpr";
-project Linked_Lists is
+with "config/arrays_config.gpr";
+project Arrays is
 
    for Source_Dirs use ("src", "config", "src/data_types");
-   for Object_Dir use "obj/" & Linked_Lists_Config.Build_Profile;
+   for Object_Dir use "obj/" & Arrays_Config.Build_Profile;
    for Create_Missing_Dirs use "True";
    for Exec_Dir use ".";
-   for Main use ("linked.adb");
+   for Main use ("manage_arrays.adb");
 
    package Compiler is
-      for Default_Switches ("Ada") use  ("-gnat2022") & Linked_Lists_Config.Ada_Compiler_Switches;
+      for Default_Switches ("Ada") use  ("-gnat2022") & Arrays_Config.Ada_Compiler_Switches;
    end Compiler;
 
    package Binder is
@@ -24,5 +24,5 @@ project Linked_Lists is
       for Artifacts (".") use ("share");
    end Install;
 
-end Linked_Lists;
+end Arrays;
 
