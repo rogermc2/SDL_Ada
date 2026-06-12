@@ -15,6 +15,16 @@ package body Types is
    end P_Image;
 
    function P_Image
+    (anArray : Pseudo_Array; Curs : Pseudo_Array_Package.Cursor)
+     return String is
+      use Pseudo_Array_Package;
+      aKey : constant Positive := Key (Curs);
+      Name : constant Unbounded_String := anArray.Element (aKey);
+   begin
+      return Positive'Image (aKey) & ": " & To_String (Name);
+   end P_Image;
+
+   function P_Image
     (Node : Unbounded_String) return String is
    begin
       return To_String (Node);

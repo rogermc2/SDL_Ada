@@ -10,10 +10,11 @@ with SDL.Video.Textures.Makers;
 with SDL.Video.Windows.Makers;
 
 with Ada.Strings.Unbounded; use Ada.Strings.Unbounded;
-with Ada.Text_IO; use Ada.Text_IO;
+--  with Ada.Text_IO; use Ada.Text_IO;
 
 with Common; use Common;
 with Types; use Types;
+with Printing; use Printing;
 procedure Manage_Arrays is
    use type SDL.Events.Event_Types;
    Width   : constant := 800;
@@ -23,8 +24,7 @@ procedure Manage_Arrays is
    Event    : SDL.Events.Events.Events;
    Running  : Boolean := True;
    My_List  : Person_List;
-   My_Array : Array_Package.Array_Record_Access :=
-    new Array_Package.Array_Record;
+   My_Array : Common.Pseudo_Array_Package.Map;
    Font     : SDL.TTFs.Fonts;
    procedure Render is
       use SDL.Video.Renderers;
@@ -88,24 +88,6 @@ procedure Manage_Arrays is
 
    end Render;
 
-   procedure Print (aList : Person_List) is
-      use Person_List_Package;
-      Curs : Cursor := aList.First;
-   begin
-      if Integer (Length (aList)) > 0 then
-         Put_Line ("List length:" & Integer'Image (Integer (Length (aList))));
-      else
-         Put_Line ("List length: 0");
-      end if;
-
-      while Has_Element (Curs) loop
-         Put (Types.P_Image (aList, Curs) & ", ");
-         Next (Curs);
-      end loop;
-      New_Line;
-
-   end Print;
-
 begin
    Print (My_List);
    My_List.Insert (12, To_Unbounded_String ("A"));
@@ -124,15 +106,15 @@ begin
    Print (My_List);
 
    Print (My_Array);
-   My_Array.Insert (My_Array, 12, To_Unbounded_String ("A"));
+   My_Array.Insert (12, To_Unbounded_String ("A"));
    Print (My_Array);
-   My_Array.Insert (My_Array, 3, To_Unbounded_String ("B"));
+   My_Array.Insert (3, To_Unbounded_String ("B"));
    Print (My_Array);
-   My_Array.Insert (My_Array, 45, To_Unbounded_String ("C"));
+   My_Array.Insert (45, To_Unbounded_String ("C"));
    Print (My_Array);
-   My_Array.Insert (My_Array, 2, To_Unbounded_String ("D"));
+   My_Array.Insert (2, To_Unbounded_String ("D"));
    Print (My_Array);
-   My_Array.Insert (My_Array, 20, To_Unbounded_String ("E"));
+   My_Array.Insert (20, To_Unbounded_String ("E"));
    Print (My_Array);
 
    if not SDL.Initialise (Flags => SDL.Enable_Screen) then
